@@ -71,8 +71,9 @@
   ];
 
   # save space and compilation time. might revise?
-  hardware.enableAllFirmware = lib.mkForce false;
-  hardware.enableRedistributableFirmware = lib.mkForce false;
+  hardware.enableAllFirmware = lib.mkForce true;
+  hardware.enableRedistributableFirmware = lib.mkForce true;
+  nixpkgs.config.allowUnfree = true;
   hardware.pulseaudio.enable = false;
   hardware.asahi.setupAsahiSound = false;
   # avoid including non-reproducible dbus docs
