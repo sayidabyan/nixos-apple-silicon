@@ -6,6 +6,7 @@
     ./peripheral-firmware
     ./boot-m1n1
     ./sound
+    ./touchbar
   ];
 
   config = let
