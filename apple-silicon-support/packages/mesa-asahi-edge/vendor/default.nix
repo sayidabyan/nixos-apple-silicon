@@ -492,13 +492,14 @@ self = stdenv.mkDerivation {
     ''}
   '';
 
-  env.NIX_CFLAGS_COMPILE = toString (
-    lib.optionals stdenv.isDarwin [
-      "-fno-common"
-    ] ++ lib.optionals enableOpenCL [
+  env.NIX_CFLAGS_COMPILE = toString ([
+      "-march=armv8.5-a+fp16+fp16fml+aes+sha2+sha3+nosve+nosve2+nomemtag+norng+nosm4+nof32mm+nof64mm"
       "-UPIPE_SEARCH_DIR"
       "-DPIPE_SEARCH_DIR=\"${placeholder "opencl"}/lib/gallium-pipe\""
   ]);
+
+  hardeningEnable = [ "pic" "format" "fortify" "stackprotector" "bindnow" ];
+  hardeningDisable = [ "pie" "relro" ];
 
   passthru = {
     inherit (libglvnd) driverLink;
@@ -532,9 +533,7 @@ self = stdenv.mkDerivation {
     changelog = "https://www.mesa3d.org/relnotes/${version}.html";
     license = with lib.licenses; [ mit ]; # X11 variant, in most files
     platforms = [
-      "i686-linux" "x86_64-linux" "x86_64-darwin" "armv5tel-linux"
-      "armv6l-linux" "armv7l-linux" "armv7a-linux" "aarch64-linux"
-      "powerpc64-linux" "powerpc64le-linux" "aarch64-darwin" "riscv64-linux"
+      "i686-linux" "x86_64-linux" "aarch64-linux"
     ];
     badPlatforms = []; # Load bearing for libGL meta on Darwin.
     maintainers = with lib.maintainers; [ primeos vcunat ]; # Help is welcome :)
