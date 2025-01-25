@@ -4,7 +4,7 @@
 }:
 
 # don't bother to provide Darwin deps
-((pkgs.callPackage ./vendor { OpenGL = null; Xplugin = null; }).override {
+((pkgs.callPackage ./vendor { }).override {
   galliumDrivers = [ "swrast" "asahi" "virgl" "zink" ];
   vulkanDrivers = [ "swrast" "asahi" ];
   vulkanLayers = [ "device-select" "overlay" ];
@@ -36,7 +36,6 @@
       "-Dgallium-xa=disabled"
       "-Dxlib-lease=disabled"
       # does not make any sense
-      "-Dandroid-libbacktrace=disabled"
       "-Dintel-rt=disabled"
       # do not want to add the dependencies
       "-Dlibunwind=disabled"
@@ -66,7 +65,6 @@
       "-Degl-native-platform=wayland"
       "-Dandroid-strict=false"
       "-Dpower8=disabled"
-      "-Dvideo-codecs=vp9dec"
       # save time, don't build tests
       "-Dbuild-tests=false"
       "-Denable-glcpp-tests=false"
@@ -74,7 +72,6 @@
 
   # replace patches with ones tweaked slightly to apply to this version
   patches = [
-    ./disk_cache-include-dri-driver-path-in-cache-key.patch
     ./opencl.patch
   ];
 })
