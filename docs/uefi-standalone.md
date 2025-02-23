@@ -1,12 +1,12 @@
-# UEFI Boot Standalone NixOS (2024-12-25)
+# UEFI Boot Standalone NixOS (2025-02-03)
 
 This guide will build and was tested with the following software:
-* Asahi Linux kernel version asahi-6.12.4-1
+* Asahi Linux kernel version asahi-6.12.12-1
 * Asahi Linux's Mesa version 25.0.0_asahi-20241211-1
-* m1n1 version v1.4.17
+* m1n1 version v1.4.21
 * Asahi Linux's U-Boot version 2024.10-1-asahi
-* Nixpkgs, as of 2024-12-19
-* macOS stub 12.3
+* Nixpkgs, as of 2025-02-01
+* macOS stub 13.5
 
 NOTE: The latest version of this guide will always be [at its home](https://github.com/tpwrules/nixos-apple-silicon/blob/main/docs/uefi-standalone.md). For more general information about Linux on Apple Silicon Macs, refer to the [Asahi Linux project](https://asahilinux.org/) and [alpha installer release](https://asahilinux.org/2022/03/asahi-linux-alpha-release/).
 
@@ -274,6 +274,7 @@ nixos# iwctl
 NetworkConfigurationEnabled: enabled
 StateDirectory: /var/lib/iwd
 Version: 2.4
+[iwd]# station wlan0 scan
 [iwd]# station wlan0 connect <SSID>
 Type the network passphrase for <SSID> psk.
 Passphrase: <your passphrase>
