@@ -174,7 +174,7 @@ self = stdenv.mkDerivation {
   '';
 
   mesonFlags = [
-    "--sysconfdir=/etc"
+    "--sysconfdir=${placeholder "opencl"}/etc"
     "--datadir=${placeholder "drivers"}/share" # Vendor files
 
     # Don't build in debug mode
